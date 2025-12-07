@@ -137,7 +137,7 @@ const locations = {
         icon: 'info-sign',
         color: 'blue',
         description: '華富邨標誌性的圓形天橋，連接不同區域的重要通道。',
-        image: 'assets/圓形天橋.png',
+        image: 'assets/circlebridge.png',
         badge: 'Architecture',
         title: '圓形天橋',
         subtitle: '華富邨標誌性的圓形天橋',
@@ -155,7 +155,7 @@ const locations = {
         icon: 'home',
         color: 'orange',
         description: '獨特的井字型公屋設計，是華富邨的建築特色。',
-        image: 'assets/井字公屋.png',
+        image: 'assets/housing.png',
         badge: 'Architecture',
         title: '井字公屋',
         subtitle: '獨特的井字型公屋設計',
@@ -173,7 +173,7 @@ const locations = {
         icon: 'tree-conifer',
         color: 'green',
         description: '設有不同難度的路線，壯麗山海景色，指示清晰的山徑，建議預留 1 至 2 小時。',
-        image: 'assets/f6313bdfc0449a9a7cd07bbf35f8d8341564ec60.png',
+        image: 'assets/WaterfallBayPark.png',
         badge: 'Hiking',
         title: '瀑布灣公園',
         subtitle: '飽覽全景海岸線的觀景行山徑',
@@ -191,7 +191,7 @@ const locations = {
         icon: 'camera',
         color: 'red',
         description: '美麗的石灘，是欣賞海景和日落的絕佳地點。',
-        image: 'assets/151d10cce69ca50a904615596745f04c968eabb0.png',
+        image: 'assets/Egg.png',
         badge: 'Beach',
         title: '雞蛋仔石灘',
         subtitle: '美麗的石灘，欣賞海景和日落',
@@ -715,8 +715,8 @@ images.forEach(img => {
 document.documentElement.style.scrollBehavior = 'smooth';
 
 // 1920 Image Hover Video Play
-const image1920 = document.getElementById('image-1920');
-const video1920 = document.getElementById('video-1920');
+const image1920 = document.getElementById('image-1964');
+const video1920 = document.getElementById('video-1964');
 
 if (image1920 && video1920) {
     image1920.addEventListener('mouseenter', () => {
