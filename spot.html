@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景點 - 華富邨</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">華富邨</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="spot.html" class="nav-link active">Spot</a></li>
+                <li><a href="story.html" class="nav-link">Story</a></li>
+                <li><a href="future.html" class="nav-link">Future</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Spot Page -->
+    <section class="page-section">
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="assets/e68b8f1eb2610c594d595a95f9605b085b6c23b5.png" alt="景點">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">景點</h1>
+                <div class="hero-button">
+                    <span>Discover</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-header">
+                <div class="map-header-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h2>探索周邊</h2>
+                <p>點擊標記以發掘華富邨周邊的海灘、餐廳、活動及設施</p>
+            </div>
+            
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <div id="map" class="interactive-map"></div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #2b7fff;"></span>
+                            <span>圓形天橋</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #ff6900;"></span>
+                            <span>井字公屋</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #0080ff;"></span>
+                            <span>瀑布灣公園</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #ff4444;"></span>
+                            <span>雞蛋仔石灘</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spot-info-card" id="spotInfoCard">
+                    <div class="spot-info-image">
+                        <img id="spotInfoImage" src="assets/f6313bdfc0449a9a7cd07bbf35f8d8341564ec60.png" alt="瀑布灣公園">
+                        <button class="spot-info-favorite" aria-label="Favorite">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 2L9.09 6.26L13 7.27L9.09 8.28L8 12.54L6.91 8.28L3 7.27L6.91 6.26L8 2Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <div class="spot-info-badge" id="spotInfoBadge">Hiking</div>
+                    </div>
+                    <div class="spot-info-content">
+                        <h3 id="spotInfoTitle">瀑布灣公園</h3>
+                        <p id="spotInfoSubtitle">飽覽全景海岸線的觀景行山徑</p>
+                        <ul class="spot-info-list" id="spotInfoList">
+                            <li>設有不同難度的路線</li>
+                            <li>壯麗山海景色</li>
+                            <li>指示清晰的山徑</li>
+                            <li>建議預留 1 至 2 小時</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-buttons">
+                <button class="map-btn active" data-location="bridge">
+                    <span class="map-btn-dot" style="background: #2b7fff;"></span>
+                    <span>圓形天橋</span>
+                </button>
+                <button class="map-btn" data-location="housing">
+                    <span class="map-btn-dot" style="background: #ff6900;"></span>
+                    <span>井字公屋</span>
+                </button>
+                <button class="map-btn" data-location="park">
+                    <span class="map-btn-dot" style="background: #0080ff;"></span>
+                    <span>瀑布灣公園</span>
+                </button>
+                <button class="map-btn" data-location="beach">
+                    <span class="map-btn-dot" style="background: #ff4444;"></span>
+                    <span>雞蛋仔石灘</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="things-to-do">
+            <div class="section-header">
+                <div class="section-header-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h2>精彩活動</h2>
+                <p>從舒展身心的活動到戶外探險，發掘享受華富邨的多種方式</p>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <img src="assets/7c687390c8f7d7979fda01bc5062a7f39b838250.png" alt="舊香港味道">
+                    <div class="activity-content">
+                        <h3>舊香港味道</h3>
+                        <p>走入冰室，讓時間停留在最美好的年代。</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <img src="assets/b7b3568bd161d48018cd1f76197193e76ad8635a.png" alt="燒烤">
+                    <div class="activity-content">
+                        <h3>燒烤</h3>
+                        <p>位於南區香港仔華富邨內的瀑布灣，設有一個位置便利的燒烤場地。</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <img src="assets/d4b70750367dc2e5202b3832bafdc4ccb764b645.png" alt="欣賞華富日落">
+                    <div class="activity-content">
+                        <h3>欣賞華富日落</h3>
+                        <p>黃昏時分是這裡最迷人的時刻，金色的夕陽灑落在井字型的舊建築與波光粼粼的海面上</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="practical-info">
+            <h2>實用資訊</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">🚌</div>
+                    <h3>前往方法</h3>
+                    <ul>
+                        <li>中環（交易廣場）：乘搭巴士 4, 4X 或 40 號</li>
+                        <li>九龍區：乘搭巴士 970 或 970X 號</li>
+                        <li>銅鑼灣：乘搭小巴 63 號</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🕐</div>
+                    <h3>開放時間</h3>
+                    <ul>
+                        <li>公共區域：24 小時開放</li>
+                        <li>瀑布灣公園：上午 7:00 至 晚上 11:00</li>
+                        <li>商店及餐廳：一般為上午 7:00 至 晚上 9:00</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🏢</div>
+                    <h3>設施</h3>
+                    <ul>
+                        <li>傳統舊式冰室（如：銀都冰室）</li>
+                        <li>華富商場及街市</li>
+                        <li>商場內設有洗手間</li>
+                        <li>瀑布灣公園</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💡</div>
+                    <h3>參觀貼士</h3>
+                    <ul>
+                        <li>此為住宅區，請保持安靜</li>
+                        <li>請勿擅闖住宅大樓內部</li>
+                        <li>前往公園建議帶備防蚊液</li>
+                        <li>請尊重居民及愛護環境，帶走垃圾</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="footer-logo-line"></div>
+                <p>© 2025, WahFuEstate</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="spot.html">Spot</a></li>
+                        <li><a href="history.html">History</a></li>
+                        <li><a href="story.html">Story</a></li>
+                        <li><a href="future.html">Future</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">g</a>
+                <a href="#" class="social-icon">i</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未來 - 華富邨</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">華富邨</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="spot.html" class="nav-link">Spot</a></li>
+                <li><a href="story.html" class="nav-link">Story</a></li>
+                <li><a href="future.html" class="nav-link active">Future</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Future Page -->
+    <section class="page-section">
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="assets/f15c7e7030150269d9acaa581e0f5ae61ee07f46.png" alt="華富邨重建">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">華富邨重建</h1>
+                <div class="hero-button">
+                    <span>Discover</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <h3>1,967</h3>
+                <p>落成年份</p>
+            </div>
+            <div class="stat-item">
+                <h3>9,000+</h3>
+                <p>規劃單位數目</p>
+            </div>
+            <div class="stat-item">
+                <h3>3</h3>
+                <p>重建階段</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>海景保留百分比</p>
+            </div>
+        </div>
+
+        <div class="before-after-section">
+            <h2>昔日與未來</h2>
+            <p>左右拖曳滑桿，對比華富邨的過去與未來願景。</p>
+            <div class="before-after-container">
+                <div class="before-after-slider">
+                    <div class="before-image">
+                        <div class="before-label">THE PAST: HISTORIC ESTATE</div>
+                    </div>
+                    <div class="after-image">
+                        <div class="after-label">THE FUTURE: ECO-TOWERS & SKY GARDENS</div>
+                    </div>
+                    <div class="slider-handle">
+                        <span>↔</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="slider-input" id="beforeAfterSlider">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="feature-card">
+                <div class="feature-emoji">🌿</div>
+                <h3>通風廊設計</h3>
+                <p>善用華富獨特的地理優勢，新大樓採用空氣動力學外型，引入天然海風，有效降低能源消耗，締造綠色生活。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-emoji">🚇</div>
+                <h3>智慧連接</h3>
+                <p>無縫連接港鐵南港島線（西段），大幅縮短交通時間，讓居民在數分鐘內即可抵達核心商業區。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-emoji">🤝</div>
+                <h3>社區樞紐</h3>
+                <p>多層平台設計融合零售與休憩空間，促進跨代共融，延續華富邨著名的濃厚鄰里情懷</p>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2>重建藍圖</h2>
+            <div class="timeline-progress">
+                <div class="timeline-line">
+                    <div class="timeline-progress-fill" id="timelineProgressFill"></div>
+                    <div class="timeline-dot active"></div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+            <div class="timeline-content">
+                <h3>第一階段：遷置與準備</h3>
+                <p>居民陸續遷往接收屋邨，華富北展開土地平整及清拆工程，為新發展做好準備。</p>
+            </div>
+            <div class="timeline-controls">
+                <button class="timeline-btn">Previous</button>
+                <button class="timeline-btn">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="footer-logo-line"></div>
+                <p>© 2025, WahFuEstate</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="spot.html">Spot</a></li>
+                        <li><a href="history.html">History</a></li>
+                        <li><a href="story.html">Story</a></li>
+                        <li><a href="future.html">Future</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">g</a>
+                <a href="#" class="social-icon">i</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
