@@ -783,3 +783,158 @@ document.addEventListener('DOMContentLoaded', () => {
     handleStoryHashNavigation();
 });
 
+
+
+// Comment page
+const config = {
+            sheetEndpoint: "https://api.sheetbest.com/sheets/118605d4-49a1-4867-8706-8bc1ce12fd2b" //Sheet.best ID
+        };
+        
+        const form = document.getElementById('messageForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMessage = document.getElementById('statusMessage');
+        const messagesList = document.getElementById('messagesList');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value || 'Not Provided',
+                message: document.getElementById('message').value,
+                // timestamp: new Date().toLocaleString('zh-CN'),
+                timestamp: new Date().toISOString(),
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            showStatus('Submitting your comment...', 'loading');
+            
+            try {
+              
+                await submitToGoogleSheet(formData);
+                
+    
+                showStatus('Message submitted successfully! Thank you for your feedback.', 'success');
+                
+                form.reset();
+                
+                setTimeout(() => {
+                    loadMessages();
+                }, 1000);
+                
+            } catch (error) {
+                showStatus('Submission failed. Please try again later. Error: ' + error.message, 'error');
+                console.error('Submission error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+                
+                if (statusMessage.classList.contains('success')) {
+                    setTimeout(() => {
+                        hideStatus();
+                    }, 3000);
+                }
+            }
+        });
+
+    
+        // Submit to Google Sheets（By Sheet.best）
+        async function submitToGoogleSheet(data) {
+            const response = await fetch(config.sheetEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to load messages');
+            }
+            
+            return response.json();
+        }
+        
+        // Load From Google Sheets(By Sheet.best)
+        async function loadMessages() {
+            try {
+                 const response = await fetch(config.sheetEndpoint);
+                 const messages = await response.json();
+                
+
+                displayMessages(messages);
+            } catch (error) {
+                console.error('Failed to load messages:', error);
+                messagesList.innerHTML = `
+                    <div class="error status-message">
+                        Unable to load messages. Please try again later.
+                    </div>
+                    <div class="no-messages">
+                        No messages yet. Be the first to leave a comment!
+                    </div>
+                `;
+            }
+        }
+        
+        // Display Comments
+        function displayMessages(messages) {
+            if (!messages || messages.length === 0) {
+                messagesList.innerHTML = `
+                    <div class="no-messages">
+                        No messages yet. Be the first to leave a comment!
+                    </div>
+                `;
+                return;
+            }
+            
+            messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            const recentMessages = messages.slice(0, 10);
+        
+
+
+
+            messagesList.innerHTML = recentMessages.map(msg => 
+                
+                `
+                <div class="message-item">
+                    <div class="message-header">
+                        <div class="message-author">👤 ${msg.name}</div>
+                        <div class="message-date">📅 ${new Date(msg.timestamp).toLocaleString('en-US') || 'just now'}</div>
+                    </div>
+                    <div class="message-content">${msg.message}</div>
+                </div>
+            `).join('');
+        }
+        
+        function showStatus(text, type) {
+            statusMessage.textContent = text;
+            statusMessage.className = 'status-message ' + type;
+        }
+        
+        function hideStatus() {
+            statusMessage.className = 'status-message';
+            statusMessage.style.display = 'none';
+        }
+        
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            loadMessages();
+        });
+        
+
+        form.addEventListener('input', (e) => {
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (name.length < 1) {
+                showStatus('Name must be at least 1 characters', 'error');
+                submitBtn.disabled = true;
+            } else if (message.length < 3) {
+                showStatus('Message must be at least 3 characters', 'error');
+                submitBtn.disabled = true;
+            } else {
+                hideStatus();
+                submitBtn.disabled = false;
+            }
+        });
