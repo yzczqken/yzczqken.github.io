@@ -1,35 +1,45 @@
-const express = require('express')
 
-const app = express()
+const express = require('express');
+const path = require('path');
 
-app.get('/',(req,res)=>{
-    res.sendFile('./index.html',{root:__dirname})
-})
+const app = express();
 
+app.use(express.static(__dirname));
+
+app.use('/assets', express.static(path.join(__dirname, 'asset')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Redirect
 app.get('/home',(req,res)=>{
-    res.redirect('/',{root:__dirname})
+    res.redirect('/')
 })
 
 app.get('/future',(req,res)=>{
-    res.sendFile('./future.html',{root:__dirname})
+    res.sendFile(path.join(__dirname, 'future.html'));
 })
 app.get('/history',(req,res)=>{
-    res.sendFile('./history.html',{root:__dirname})
+    res.sendFile(path.join(__dirname, 'history.html'));
 })
 app.get('/spot',(req,res)=>{
-    res.sendFile('./spot.html',{root:__dirname})
+    res.sendFile(path.join(__dirname, 'spot.html'));
 })
 app.get('/story',(req,res)=>{
-    res.sendFile('./history.html',{root:__dirname})
+    res.sendFile(path.join(__dirname, 'story.html'));
 })
 app.get('/comment',(req,res)=>{
-    res.sendFile('./comment.html',{root:__dirname})
+    res.sendFile(path.join(__dirname, 'comment.html'));
 })
-app.get('/error',(req,res)=>{
-    res.status(404).sendFile('./error.html',{root:__dirname})
+
+// detect any error => error.html => home page (in 5 seconds)
+app.all(/.*/,(req,res)=>{
+    res.status(404).sendFile(path.join(__dirname, 'error.html'))
     res.set({
         'Content-Type': 'text/html',
         'Refresh': '5;url=/'
     })
 })
+
 app.listen(3000)
