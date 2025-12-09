@@ -29,9 +29,6 @@ app.get('/spot',(req,res)=>{
 app.get('/story',(req,res)=>{
     res.sendFile(path.join(__dirname, 'story.html'));
 })
-app.get('/comment',(req,res)=>{
-    res.sendFile(path.join(__dirname, 'comment.html'));
-})
 
 // detect any error => error.html => home page (in 5 seconds)
 app.all(/.*/,(req,res)=>{
