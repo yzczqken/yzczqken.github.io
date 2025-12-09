@@ -149,7 +149,7 @@ const locations = {
         ]
     },
     housing: {
-        name: 'Twin Tower Housing - Wah Som House (井字公屋)',
+        name: 'Twin Tower Housing - Wah Fu House (井字公屋)',
         lat: 22.25135,
         lon: 114.13475,
         icon: 'home',
