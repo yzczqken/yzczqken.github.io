@@ -295,28 +295,22 @@ const mapButtons = document.querySelectorAll('.map-btn');
 
 mapButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Remove active class from all buttons
         mapButtons.forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
         btn.classList.add('active');
         
-        // Get location key
         const locationKey = btn.getAttribute('data-location');
         const location = locations[locationKey];
         
-        // Update spot info card
         updateSpotInfoCard(locationKey);
         
         
         if (location && map) {
-            // Fly to location (handle both lon and lng)
             const lng = location.lon !== undefined ? location.lon : location.lng;
             map.flyTo([location.lat, lng], 16, {
                 animate: true,
                 duration: 1.0
             });
             
-            // Open popup for the marker
             const markerData = markers.find(m => m.key === locationKey);
             if (markerData) {
                 setTimeout(() => {
@@ -329,9 +323,7 @@ mapButtons.forEach(btn => {
 
 // Initialize map on spot.html page
 if (currentPage === 'spot.html' || currentPage.includes('spot')) {
-    // Initialize map immediately on spot page
     if (document.getElementById('map')) {
-        // Initialize info card with default location first
         const activeButton = document.querySelector('.map-btn.active');
         if (activeButton) {
             const defaultLocation = activeButton.getAttribute('data-location');
@@ -343,25 +335,20 @@ if (currentPage === 'spot.html' || currentPage.includes('spot')) {
         setTimeout(() => {
             initMap();
             
-            // Check for location parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
             const locationParam = urlParams.get('location');
             
             if (locationParam && locations[locationParam]) {
-                // Scroll to map section first
                 const mapSection = document.querySelector('.map-section');
                 if (mapSection) {
                     mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
                 
-                // Wait for map to be fully initialized
                 setTimeout(() => {
-                    // Find and click the corresponding button
                     const targetButton = document.querySelector(`.map-btn[data-location="${locationParam}"]`);
                     if (targetButton) {
                         targetButton.click();
                     } else {
-                        // If button not found, still update the info card
                         updateSpotInfoCard(locationParam);
                     }
                 }, 1000);
@@ -386,7 +373,6 @@ if (beforeAfterSlider && afterImage && sliderHandle) {
         updateSlider(e.target.value);
     });
     
-    // Mouse drag functionality
     let isDragging = false;
     
     sliderHandle.addEventListener('mousedown', (e) => {
@@ -467,18 +453,15 @@ function updateTimeline() {
         timelineDescription.textContent = timelineData[currentTimelineIndex].description;
     }
     
-    // Update progress fill
     const progressFill = document.getElementById('timelineProgressFill');
     if (progressFill) {
         const progress = (currentTimelineIndex / (timelineData.length - 1)) * 100;
         progressFill.style.width = progress + '%';
         
-        // Update progress fill color to match active dot
         const colors = ['#e29578', '#006d77', '#83c5be'];
         progressFill.style.background = colors[currentTimelineIndex] || '#e29578';
     }
     
-    // Update button states
     if (prevTimelineBtn) {
         prevTimelineBtn.style.opacity = currentTimelineIndex === 0 ? '0.3' : '1';
         prevTimelineBtn.style.pointerEvents = currentTimelineIndex === 0 ? 'none' : 'auto';
@@ -495,7 +478,6 @@ if (prevTimelineBtn && nextTimelineBtn) {
         if (currentTimelineIndex > 0) {
             currentTimelineIndex--;
             updateTimeline();
-            // Scroll to timeline section
             const timelineSection = document.querySelector('.timeline-section');
             if (timelineSection) {
                 timelineSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -507,7 +489,6 @@ if (prevTimelineBtn && nextTimelineBtn) {
         if (currentTimelineIndex < timelineData.length - 1) {
             currentTimelineIndex++;
             updateTimeline();
-            // Scroll to timeline section to show the next spot
             const timelineSection = document.querySelector('.timeline-section');
             if (timelineSection) {
                 timelineSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -515,7 +496,6 @@ if (prevTimelineBtn && nextTimelineBtn) {
         }
     });
     
-    // Initialize timeline
     updateTimeline();
 }
 
@@ -545,7 +525,6 @@ if (floatingNav && storySections.length > 0) {
 
 // Floating Story Navigation
 if (floatingStoryNav && storySections.length > 0) {
-    // Show/hide floating nav based on scroll position
     const storiesToc = document.querySelector('.stories-toc');
     let isNavVisible = false;
     
@@ -586,7 +565,6 @@ if (floatingStoryNav && storySections.length > 0) {
             if (entry.isIntersecting) {
                 const storyId = entry.target.id;
                 
-                // Update floating nav active state
                 floatingNavItems.forEach(item => {
                     if (item.getAttribute('data-story') === storyId) {
                         item.classList.add('active');
@@ -595,7 +573,6 @@ if (floatingStoryNav && storySections.length > 0) {
                     }
                 });
                 
-                // Update original TOC active state
                 const tocItems = document.querySelectorAll('.toc-item');
                 const index = Array.from(storySections).indexOf(entry.target);
                 tocItems.forEach(item => item.classList.remove('active'));
@@ -613,7 +590,6 @@ if (floatingStoryNav && storySections.length > 0) {
         storyObserver.observe(section);
     });
     
-    // Update visibility on scroll
     window.addEventListener('scroll', updateFloatingNavVisibility);
     updateFloatingNavVisibility();
 }
@@ -744,7 +720,6 @@ function handleStoryHashNavigation() {
     if (currentPage === 'story.html' || currentPage.includes('story')) {
         const hash = window.location.hash;
         if (hash) {
-            // Wait for page to load, then scroll to the section
             setTimeout(() => {
                 const targetSection = document.querySelector(hash);
                 if (targetSection) {
@@ -753,7 +728,6 @@ function handleStoryHashNavigation() {
                         block: 'start'
                     });
                     
-                    // Update floating nav active state
                     const floatingNavItem = document.querySelector(`.floating-nav-item[data-story="${hash.substring(1)}"]`);
                     if (floatingNavItem) {
                         floatingNavItems.forEach(item => item.classList.remove('active'));
@@ -767,19 +741,16 @@ function handleStoryHashNavigation() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Add fade-in animation to page
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
     
-    // Initialize first slide
     if (sliderItems.length > 0) {
         updateSlider();
     }
     
-    // Handle story hash navigation
     handleStoryHashNavigation();
 });
 
