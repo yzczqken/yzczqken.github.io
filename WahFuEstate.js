@@ -30,13 +30,14 @@ app.get('/story',(req,res)=>{
     res.sendFile(path.join(__dirname, 'story.html'));
 })
 
-// detect any error => error.html => home page (in 5 seconds)
-app.all(/.*/,(req,res)=>{
-    res.status(404).sendFile(path.join(__dirname, 'error.html'))
-    res.set({
+
+app.use((req,res)=>{
+res.status(404).sendFile(path.join(__dirname, 'error.html'))
+res.set({
         'Content-Type': 'text/html',
         'Refresh': '5;url=/'
     })
-})
+}) 
+
 
 app.listen(3000)
